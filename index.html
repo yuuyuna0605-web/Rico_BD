@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Rico</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111, #3b0a2a);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    input, button {
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    button {
+      background: #ff5fa2;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #ff2f87;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.12);
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 420px;
+      box-shadow: 0 0 30px rgba(255,95,162,0.35);
+    }
+
+    .hint {
+      font-size: 14px;
+      opacity: 0.75;
+    }
+
+    input[type="range"] {
+      width: 280px;
+    }
+
+    #percent {
+      font-size: 34px;
+      font-weight: bold;
+      margin: 15px;
+    }
+
+    img {
+      width: 90%;
+      max-width: 330px;
+      border-radius: 20px;
+      margin: 15px 0;
+      box-shadow: 0 0 25px rgba(255,255,255,0.25);
+    }
+
+    .message {
+      line-height: 1.8;
+      font-size: 17px;
+      max-width: 430px;
+    }
+
+    .heart {
+      position: fixed;
+      top: -20px;
+      color: pink;
+      animation: fall 4s linear forwards;
+      font-size: 22px;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Password Screen -->
+  <div id="passwordScreen" class="screen active">
+    <div class="card">
+      <h1>Access Restricted 🔒</h1>
+      <p>This page is only for one special person.</p>
+
+      <input id="passwordInput" type="password" placeholder="Enter password" />
+      <button onclick="checkPassword()">Unlock</button>
+
+      <p id="passwordMessage" class="hint"></p>
+      <p class="hint">Hint: your name</p>
+    </div>
+  </div>
+
+  <!-- Slider Game -->
+  <div id="gameScreen" class="screen">
+    <div class="card">
+      <h1>Question 💭</h1>
+      <p>How much do you think Yufan misses you?</p>
+
+      <input id="missSlider" type="range" min="0" max="100" value="0" oninput="updateSlider()" />
+      <div id="percent">0%</div>
+
+      <p id="sliderText">Move the slider.</p>
+
+      <button id="revealButton" style="display:none;" onclick="showFinal()">
+        Reveal Secret 💌
+      </button>
+    </div>
+  </div>
+
+  <!-- Final Screen -->
+  <div id="finalScreen" class="screen">
+    <h1>Happy Birthday Rico 🎂</h1>
+
+    <!-- 写真を入れるなら、GitHubに photo1.jpg としてアップロード -->
+    <img src="photo1.jpg" alt="Our photo" />
+
+    <div class="message">
+      <p>
+        Rico, happy birthday.
+      </p>
+
+      <p>
+        Even though we are far apart, I still wanted to do something
+        a little special for you.
+      </p>
+
+      <p>
+        I’m really happy that I met you.
+        Thank you for being in my life.
+      </p>
+
+      <p>
+        I hope this year brings you a lot of happiness, love, and beautiful memories.
+      </p>
+
+      <p>
+        From Yufan
+      </p>
+    </div>
+
+    <button onclick="giftMessage()">🎁 Open your gift now</button>
+    <p id="giftText"></p>
+  </div>
+
+  <script>
+    const PASSWORD = "0103"; // ← パスワードを変えるならここ
+
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value.toLowerCase();
+      const message = document.getElementById("passwordMessage");
+
+      if (input === PASSWORD) {
+        showScreen("gameScreen");
+      } else {
+        message.innerText = "Wrong password... try again 🤨";
+      }
+    }
+
+    function updateSlider() {
+      const value = document.getElementById("missSlider").value;
+      document.getElementById("percent").innerText = value + "%";
+
+      const text = document.getElementById("sliderText");
+      const button = document.getElementById("revealButton");
+
+      if (value < 70) {
+        text.innerText = "Hmm... definitely more than that.";
+        button.style.display = "none";
+      } else if (value < 95) {
+        text.innerText = "Getting closer...";
+        button.style.display = "none";
+      } else if (value < 100) {
+        text.innerText = "Almost correct.";
+        button.style.display = "none";
+      } else {
+        text.innerText = "Correct. 100% is the only right answer.";
+        button.style.display = "inline-block";
+        startHearts();
+      }
+    }
+
+    function showFinal() {
+      showScreen("finalScreen");
+      startHearts();
+    }
+
+    function giftMessage() {
+      document.getElementById("giftText").innerText =
+        "Now you can open your real gift 🎁";
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
+    }
+
+    function startHearts() {
+      for (let i = 0; i < 25; i++) {
+        setTimeout(createHeart, i * 120);
+      }
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (18 + Math.random() * 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+  </script>
+
+</body>
+</html>
