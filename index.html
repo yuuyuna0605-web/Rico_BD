@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #3b0a2a, #080808 70%);
+      background: radial-gradient(circle at top, #3b0a2a, #070707 75%);
       color: white;
       text-align: center;
       overflow-x: hidden;
@@ -25,16 +25,14 @@
       flex-direction: column;
     }
 
-    .active {
-      display: flex;
-    }
+    .active { display: flex; }
 
     .vault-card {
-      background: rgba(0, 0, 0, 0.68);
+      background: rgba(0, 0, 0, 0.72);
       border: 1px solid rgba(255, 95, 162, 0.6);
       padding: 28px;
-      border-radius: 22px;
-      max-width: 440px;
+      border-radius: 24px;
+      max-width: 460px;
       width: 90%;
       box-shadow: 0 0 35px rgba(255, 95, 162, 0.35);
       position: relative;
@@ -48,7 +46,7 @@
 
     input, button {
       padding: 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: none;
       font-size: 16px;
       margin: 10px;
@@ -61,9 +59,7 @@
       font-weight: bold;
     }
 
-    button:hover {
-      background: #ff2f87;
-    }
+    button:hover { background: #ff2f87; }
 
     .hint {
       font-size: 14px;
@@ -74,7 +70,7 @@
       text-align: left;
       background: rgba(255,255,255,0.08);
       padding: 18px;
-      border-radius: 15px;
+      border-radius: 16px;
       margin: 18px 0;
       line-height: 1.8;
     }
@@ -110,7 +106,7 @@
       border-radius: 14px;
       padding: 18px;
       margin: 20px 0;
-      min-height: 130px;
+      min-height: 135px;
       font-family: monospace;
       color: #ffd1e5;
     }
@@ -148,29 +144,52 @@
       border: 1px solid rgba(120,255,180,0.7) !important;
     }
 
-    .lock-option {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-    }
-
-    .tap-heart {
-      font-size: 46px;
-      background: transparent;
-    }
-
-    img {
-      width: 90%;
-      max-width: 330px;
-      border-radius: 20px;
-      margin: 15px 0;
-      box-shadow: 0 0 25px rgba(255,255,255,0.25);
-    }
-
     .message {
       line-height: 1.8;
       font-size: 17px;
       max-width: 430px;
+      white-space: pre-line;
+    }
+
+    img {
+      width: 90%;
+      max-width: 340px;
+      border-radius: 22px;
+      margin: 15px 0;
+      box-shadow: 0 0 25px rgba(255,255,255,0.25);
+    }
+
+    .letter-choice {
+      width: 54px;
+      height: 54px;
+      font-size: 22px;
+      margin: 6px;
+    }
+
+    .name-box {
+      font-size: 34px;
+      letter-spacing: 8px;
+      margin: 20px 0;
+      color: #ffd1e5;
+    }
+
+    .fire {
+      font-size: 54px;
+      margin: 20px 0;
+      min-height: 70px;
+    }
+
+    .blur-photo {
+      filter: blur(12px);
+      transition: filter 0.4s ease;
+    }
+
+    .dark-moment {
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 28px;
+      border-radius: 20px;
+      line-height: 1.8;
     }
 
     .heart {
@@ -192,7 +211,6 @@
 
 <body>
 
-  <!-- Password Screen -->
   <div id="passwordScreen" class="screen active">
     <div class="vault-card">
       <h1>MEMORY VAULT</h1>
@@ -200,6 +218,7 @@
 
       <div class="vault-info">
         <p><span>Archive Owner:</span> Rico</p>
+        <p><span>Archive Keeper:</span> Yufan</p>
         <p><span>Status:</span> <strong class="locked">LOCKED</strong></p>
         <p><span>Package:</span> 5 birthday memories detected</p>
       </div>
@@ -214,7 +233,6 @@
     </div>
   </div>
 
-  <!-- Loading Screen -->
   <div id="loadingScreen" class="screen">
     <div class="vault-card">
       <h1>ACCESS GRANTED</h1>
@@ -234,55 +252,45 @@
     </div>
   </div>
 
-  <!-- Memory Menu -->
   <div id="menuScreen" class="screen">
     <div class="vault-card">
       <h1>MEMORY ARCHIVE</h1>
-      <p class="hint">Choose a memory to unlock</p>
+      <p id="progressText" class="hint">0 / 5 Memories Restored</p>
 
       <div class="memory-grid">
-        <button id="memoryBtn1" onclick="openMemory(1)">Memory #1 🔒</button>
-        <button id="memoryBtn2" onclick="openMemory(2)">Memory #2 🔒</button>
-        <button id="memoryBtn3" onclick="openMemory(3)">Memory #3 🔒</button>
-        <button id="memoryBtn4" onclick="openMemory(4)">Memory #4 🔒</button>
-        <button id="memoryBtn5" onclick="openMemory(5)">Memory #5 🔒</button>
+        <button id="memoryBtn1" onclick="openMemory(1)">Memory #1 — The Beginning 🔒</button>
+        <button id="memoryBtn2" onclick="openMemory(2)">Memory #2 — Adventure 🔒</button>
+        <button id="memoryBtn3" onclick="openMemory(3)">Memory #3 — Everyday Life 🔒</button>
+        <button id="memoryBtn4" onclick="openMemory(4)">Memory #4 — Goodbye For Now 🔒</button>
+        <button id="memoryBtn5" onclick="openMemory(5)">Memory #5 — Final Archive 🔒</button>
       </div>
     </div>
   </div>
 
-  <!-- Game Screen -->
-  <div id="memoryGameScreen" class="screen">
+  <div id="missionScreen" class="screen">
     <div class="vault-card">
-      <h1 id="gameTitle">Memory Lock</h1>
-      <p id="gameQuestion"></p>
-
-      <div id="gameArea"></div>
-
-      <p id="gameFeedback" class="hint"></p>
+      <h1 id="missionTitle">Memory Lock</h1>
+      <p id="missionText"></p>
+      <div id="missionArea"></div>
+      <p id="missionFeedback" class="hint"></p>
       <button onclick="showScreen('menuScreen')">Back to Archive</button>
     </div>
   </div>
 
-  <!-- Memory Detail -->
-  <div id="memoryDetailScreen" class="screen">
+  <div id="memoryScreen" class="screen">
     <div class="vault-card">
       <h1 id="memoryTitle">Memory Unlocked</h1>
       <img id="memoryImage" src="" alt="Memory photo" />
-
-      <div class="message">
-        <p id="memoryMessage"></p>
-      </div>
-
+      <div class="message" id="memoryMessage"></div>
       <button onclick="showScreen('menuScreen')">Back to Archive</button>
     </div>
   </div>
 
   <script>
     const PASSWORD = "0103";
+    const FINAL_CODE = "8472";
 
-    let currentMemory = 1;
-
-    let unlockedMemories = {
+    const unlocked = {
       1: false,
       2: false,
       3: false,
@@ -292,29 +300,52 @@
 
     const memories = {
       1: {
-        title: "Memory #1 Unlocked",
+        title: "Memory #1 — The Beginning",
         image: "photo1.jpg",
-        message: "This is where our memory starts. I still smile when I think about this."
+        message:
+`This is where everything started.
+
+Back then I had no idea
+how important you would become.`
       },
       2: {
-        title: "Memory #2 Unlocked",
+        title: "Memory #2 — Adventure",
         image: "photo2.jpg",
-        message: "This photo reminds me how happy I am that I met you."
+        message:
+`One of my favorite memories.
+
+No phones.
+No distractions.
+Just us.`
       },
       3: {
-        title: "Memory #3 Unlocked",
+        title: "Memory #3 — Everyday Life",
         image: "photo3.jpg",
-        message: "Even with the distance between us, you still feel close to me."
+        message:
+`Not every memory needs to be special.
+
+Some of my favorites
+are the ordinary days with you.`
       },
       4: {
-        title: "Memory #4 Unlocked",
+        title: "Memory #4 — Goodbye For Now",
         image: "photo4.jpg",
-        message: "This one is one of my favorite memories with you."
+        message:
+`This was one of the hardest moments.
+
+I didn't want to let go.`
       },
       5: {
-        title: "Final Memory Unlocked",
+        title: "Memory #5 — Final Archive",
         image: "photo5.jpg",
-        message: "Happy birthday Rico. I hope this makes you smile, even just a little. I miss you a lot."
+        message:
+`Thank you for choosing me.
+
+Thank you for staying.
+
+Thank you for being my girlfriend.
+
+Happy Birthday Rico.`
       }
     };
 
@@ -363,19 +394,13 @@
 
       typeText("line1", "> Authentication successful...", 45, () => {
         updateLoading(25);
-
-        typeText("line2", "> Initializing Memory Vault...", 45, () => {
+        typeText("line2", "> Opening Rico's Memory Vault...", 45, () => {
           updateLoading(50);
-
-          typeText("line3", "> Scanning birthday archive...", 45, () => {
+          typeText("line3", "> Searching for birthday memories...", 45, () => {
             updateLoading(78);
-
             typeText("line4", "> 5 encrypted memories detected.", 45, () => {
               updateLoading(100);
-
-              setTimeout(() => {
-                showScreen("menuScreen");
-              }, 1200);
+              setTimeout(() => showScreen("menuScreen"), 1200);
             });
           });
         });
@@ -383,31 +408,40 @@
     }
 
     function openMemory(num) {
-      currentMemory = num;
-      document.getElementById("gameFeedback").innerText = "";
-      document.getElementById("gameArea").innerHTML = "";
+      document.getElementById("missionFeedback").innerText = "";
+      document.getElementById("missionArea").innerHTML = "";
 
-      if (unlockedMemories[num]) {
+      if (unlocked[num]) {
         showMemory(num);
         return;
       }
 
-      showScreen("memoryGameScreen");
+      showScreen("missionScreen");
 
-      if (num === 1) memoryQuiz();
-      if (num === 2) tapGame();
-      if (num === 3) distanceGame();
-      if (num === 4) findHeartGame();
-      if (num === 5) finalUnlockGame();
+      if (num === 1) missionName();
+      if (num === 2) missionCampfire();
+      if (num === 3) missionRestore();
+      if (num === 4) missionAirport();
+      if (num === 5) missionFinalCode();
     }
 
     function unlockMemory(num) {
-      unlockedMemories[num] = true;
+      unlocked[num] = true;
 
       const btn = document.getElementById("memoryBtn" + num);
-      btn.innerText = "Memory #" + num + " ✅";
+      const labels = [
+        "",
+        "Memory #1 — The Beginning ✅",
+        "Memory #2 — Adventure ✅",
+        "Memory #3 — Everyday Life ✅",
+        "Memory #4 — Goodbye For Now ✅",
+        "Memory #5 — Final Archive ✅"
+      ];
+
+      btn.innerText = labels[num];
       btn.classList.add("unlocked");
 
+      updateProgress();
       showMemory(num);
 
       if (num === 5) {
@@ -415,110 +449,140 @@
       }
     }
 
+    function updateProgress() {
+      const count = Object.values(unlocked).filter(Boolean).length;
+      document.getElementById("progressText").innerText =
+        count + " / 5 Memories Restored" + (count === 5 ? " — Archive Complete" : "");
+    }
+
     function showMemory(num) {
       document.getElementById("memoryTitle").innerText = memories[num].title;
       document.getElementById("memoryImage").src = memories[num].image;
       document.getElementById("memoryMessage").innerText = memories[num].message;
-      showScreen("memoryDetailScreen");
+      showScreen("memoryScreen");
     }
 
-    function memoryQuiz() {
-      document.getElementById("gameTitle").innerText = "Memory Lock #1";
-      document.getElementById("gameQuestion").innerText = "Who is this birthday archive for?";
+    function missionName() {
+      let name = "R_CO";
 
-      document.getElementById("gameArea").innerHTML = `
-        <button class="lock-option" onclick="wrongAnswer()">Someone random</button>
-        <button class="lock-option" onclick="unlockMemory(1)">Rico</button>
-        <button class="lock-option" onclick="wrongAnswer()">Yufan</button>
-      `;
-    }
+      document.getElementById("missionTitle").innerText = "Memory Lock #1";
+      document.getElementById("missionText").innerText =
+        "This memory is incomplete. Restore the name to confirm the owner.";
 
-    function tapGame() {
-      let taps = 0;
-
-      document.getElementById("gameTitle").innerText = "Memory Lock #2";
-      document.getElementById("gameQuestion").innerText = "Tap the heart 7 times to restore this memory.";
-
-      document.getElementById("gameArea").innerHTML = `
-        <button class="tap-heart" onclick="tapHeart()">❤️</button>
-        <p id="tapCount">0 / 7</p>
+      document.getElementById("missionArea").innerHTML = `
+        <div class="name-box" id="nameBox">${name}</div>
+        <button class="letter-choice" onclick="chooseLetter('A')">A</button>
+        <button class="letter-choice" onclick="chooseLetter('I')">I</button>
+        <button class="letter-choice" onclick="chooseLetter('E')">E</button>
       `;
 
-      window.tapHeart = function() {
-        taps++;
-        document.getElementById("tapCount").innerText = taps + " / 7";
-
-        if (taps >= 7) {
-          unlockMemory(2);
-        }
-      };
-    }
-
-    function distanceGame() {
-      let distance = 12000;
-
-      document.getElementById("gameTitle").innerText = "Memory Lock #3";
-      document.getElementById("gameQuestion").innerText = "Reduce the distance to 0 km.";
-
-      document.getElementById("gameArea").innerHTML = `
-        <h2 id="distanceText">${distance} km</h2>
-        <button onclick="reduceDistance()">Move closer</button>
-      `;
-
-      window.reduceDistance = function() {
-        distance -= 3000;
-        if (distance < 0) distance = 0;
-
-        document.getElementById("distanceText").innerText = distance + " km";
-
-        if (distance === 0) {
-          unlockMemory(3);
-        }
-      };
-    }
-
-    function findHeartGame() {
-      document.getElementById("gameTitle").innerText = "Memory Lock #4";
-      document.getElementById("gameQuestion").innerText = "Find the real heart.";
-
-      document.getElementById("gameArea").innerHTML = `
-        <button onclick="wrongAnswer()">♡</button>
-        <button onclick="wrongAnswer()">♡</button>
-        <button onclick="unlockMemory(4)">❤</button>
-        <button onclick="wrongAnswer()">♡</button>
-        <button onclick="wrongAnswer()">♡</button>
-      `;
-    }
-
-    function finalUnlockGame() {
-      document.getElementById("gameTitle").innerText = "Final Memory Lock";
-      document.getElementById("gameQuestion").innerText = "Final question: how much does Yufan miss you?";
-
-      document.getElementById("gameArea").innerHTML = `
-        <input id="finalSlider" type="range" min="0" max="100" value="0" oninput="checkFinalSlider()" />
-        <h2 id="finalPercent">0%</h2>
-        <p id="finalText">Move the slider.</p>
-      `;
-
-      window.checkFinalSlider = function() {
-        const value = document.getElementById("finalSlider").value;
-        document.getElementById("finalPercent").innerText = value + "%";
-
-        if (value < 100) {
-          document.getElementById("finalText").innerText = "Nope. More.";
+      window.chooseLetter = function(letter) {
+        if (letter === "I") {
+          document.getElementById("nameBox").innerText = "RICO";
+          document.getElementById("missionFeedback").innerText = "Identity confirmed.";
+          setTimeout(() => unlockMemory(1), 800);
         } else {
-          document.getElementById("finalText").innerText = "Correct.";
-          setTimeout(() => unlockMemory(5), 600);
+          document.getElementById("missionFeedback").innerText = "That is not the missing piece.";
         }
       };
     }
 
-    function wrongAnswer() {
-      document.getElementById("gameFeedback").innerText = "Wrong key. Try again.";
+    function missionCampfire() {
+      let wood = 0;
+      const fires = ["", "🔥", "🔥🔥", "🔥🔥🔥", "🔥🔥🔥🔥", "🔥🔥🔥🔥🔥"];
+
+      document.getElementById("missionTitle").innerText = "Memory Lock #2";
+      document.getElementById("missionText").innerText =
+        "This adventure has gone cold. Restore the campfire.";
+
+      document.getElementById("missionArea").innerHTML = `
+        <div class="fire" id="fireBox">🪵</div>
+        <button onclick="addWood()">Add wood</button>
+        <p id="woodCount">0 / 5</p>
+      `;
+
+      window.addWood = function() {
+        wood++;
+        document.getElementById("fireBox").innerText = fires[wood];
+        document.getElementById("woodCount").innerText = wood + " / 5";
+
+        if (wood >= 5) {
+          document.getElementById("missionFeedback").innerText = "Campfire restored.";
+          setTimeout(() => unlockMemory(2), 800);
+        }
+      };
+    }
+
+    function missionRestore() {
+      document.getElementById("missionTitle").innerText = "Memory Lock #3";
+      document.getElementById("missionText").innerText =
+        "A quiet memory is fading. Restore it slowly.";
+
+      document.getElementById("missionArea").innerHTML = `
+        <img id="restoreImage" class="blur-photo" src="photo3.jpg" alt="Fading memory" />
+        <input id="restoreSlider" type="range" min="0" max="100" value="0" oninput="restoreMemory()" />
+        <p id="restorePercent">0%</p>
+      `;
+
+      window.restoreMemory = function() {
+        const value = document.getElementById("restoreSlider").value;
+        const blur = 12 - value * 0.12;
+
+        document.getElementById("restoreImage").style.filter = "blur(" + blur + "px)";
+        document.getElementById("restorePercent").innerText = value + "%";
+
+        if (value == 100) {
+          document.getElementById("missionFeedback").innerText = "Memory restored.";
+          setTimeout(() => unlockMemory(3), 700);
+        }
+      };
+    }
+
+    function missionAirport() {
+      document.getElementById("missionTitle").innerText = "Memory Lock #4";
+      document.getElementById("missionText").innerText = "";
+
+      document.getElementById("missionArea").innerHTML = `
+        <div class="dark-moment">
+          <p id="airportLine">Close your eyes.</p>
+          <button id="readyBtn" style="display:none;" onclick="unlockMemory(4)">I'm ready</button>
+        </div>
+      `;
+
+      setTimeout(() => {
+        document.getElementById("airportLine").innerText =
+          "Remember this moment.\nThe goodbye.\nThe kiss.\nThe part I didn't want to end.";
+        document.getElementById("readyBtn").style.display = "inline-block";
+      }, 3000);
+    }
+
+    function missionFinalCode() {
+      document.getElementById("missionTitle").innerText = "Final Archive";
+      document.getElementById("missionText").innerText =
+        "Authorization required. Only the Archive Keeper can unlock this memory.";
+
+      document.getElementById("missionArea").innerHTML = `
+        <p>Call Yufan and request authorization.</p>
+        <p class="hint">Tell him the required words.</p>
+        <input id="finalCodeInput" type="password" placeholder="Enter unlock code" />
+        <button onclick="checkFinalCode()">Authorize</button>
+      `;
+
+      window.checkFinalCode = function() {
+        const code = document.getElementById("finalCodeInput").value;
+
+        if (code === FINAL_CODE) {
+          document.getElementById("missionFeedback").innerText = "Authorization accepted.";
+          setTimeout(() => unlockMemory(5), 800);
+        } else {
+          document.getElementById("missionFeedback").innerText =
+            "Authorization denied. Ask Yufan for the code.";
+        }
+      };
     }
 
     function startHearts() {
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 35; i++) {
         setTimeout(createHeart, i * 120);
       }
     }
@@ -528,12 +592,10 @@
       heart.className = "heart";
       heart.innerText = "❤";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (18 + Math.random() * 20) + "px";
+      heart.style.fontSize = (18 + Math.random() * 22) + "px";
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 4000);
+      setTimeout(() => heart.remove(), 4000);
     }
   </script>
 
