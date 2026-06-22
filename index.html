@@ -258,11 +258,11 @@
       <p id="progressText" class="hint">0 / 5 Memories Restored</p>
 
       <div class="memory-grid">
-        <button id="memoryBtn1" onclick="openMemory(1)">Memory #1 — The Beginning 🔒</button>
-        <button id="memoryBtn2" onclick="openMemory(2)">Memory #2 — Adventure 🔒</button>
-        <button id="memoryBtn3" onclick="openMemory(3)">Memory #3 — Everyday Life 🔒</button>
-        <button id="memoryBtn4" onclick="openMemory(4)">Memory #4 — Goodbye For Now 🔒</button>
-        <button id="memoryBtn5" onclick="openMemory(5)">Memory #5 — Final Archive 🔒</button>
+        <button id="memoryBtn1" onclick="openMemory(1)">Chapter 1 — The Beginning 🔒</button>
+        <button id="memoryBtn2" onclick="openMemory(2)">Chapter 2 — Adventure 🔒</button>
+        <button id="memoryBtn3" onclick="openMemory(3)">Chapter 3 — Everyday Life 🔒</button>
+        <button id="memoryBtn4" onclick="openMemory(4)">Chapter 4 — Goodbye For Now 🔒</button>
+        <button id="memoryBtn5" onclick="openMemory(5)">Chapter 5 — Final Archive 🔒</button>
       </div>
     </div>
   </div>
@@ -305,18 +305,23 @@
         message:
 `This is where everything started.
 
-Back then I had no idea
-how important you would become.`
+今思えばここが初デートだよね
+当時はりこのことを好きになって付き合うことになるとは思ってなかったけど、
+りこといるときは居心地がよくて自然体でいられたから、この時から惹かれ始めてたと思う。
+家送って帰った時に、ここのカフェ一緒に行こうって誘ってくれて嬉しかったし、ここが始まりだと思ってる。
+出会ってくれてありがとう。`
       },
       2: {
         title: "Chapter 2 — Adventure",
         image: "photo2.jpg",
         message:
-`One of my favorite memories.
+`Just Us.
 
-No phones.
-No distractions.
-Just us.`
+２人でいったJoshua treeのキャンプとても楽しかったよね。
+りこの人生観や価値観、家族に対する考えとかここで知れたし
+車に引きずられる話とか今でも心配してるし、危なっかしい子なんだなって
+これからそばにいて守ってあげれたらいいなって思い始めてた。
+この時からもう好きになってました。`
       },
       3: {
         title: "Chapter 3 — Everyday Life",
@@ -324,16 +329,27 @@ Just us.`
         message:
 `Not every memory needs to be special.
 
-Some of my favorites
-are the ordinary days with you.`
+よく言ってるかもしれないけど、
+俺はこういう何気ないりことの日常を本当に幸せに感じてたよ。
+りこは日常的なことそんな好きじゃないとかゆってたけど、
+この写真撮ってくれてるから、りこも俺との日常はやっぱ幸せに感じてくれてたかなと思ってる。
+これが何気にお気に入りの一枚笑
+`
       },
       4: {
         title: "Chapter 4 — Goodbye For Now",
         image: "photo4.jpg",
         message:
-`This was one of the hardest moments.
+`I didn't want to let go.
 
-I didn't want to let go.`
+いろんな人をLAXから送り出してきたけど、
+初めて泣きそうになってた笑
+ロマンチック好きな俺は
+この時りこに愛してるって伝えたかったけど、
+多分言った瞬間俺がめっちゃ泣いちゃってたから言えなかった。
+
+愛してる。
+`
       },
       5: {
         title: "Chapter 5 — Final Archive",
@@ -341,9 +357,33 @@ I didn't want to let go.`
         message:
 `Thank you for choosing me.
 
-Thank you for staying.
+１月３日、俺の遅刻から始まり
+りこの好きそうな建築物めぐって
+変なフードコートも行って笑
+二人の好きなフレンチ食べて
+ビーチでバラ持って告白させてもらって
+りこが応えてくれた
 
-Thank you for being my girlfriend.
+まずは出会ってくれて、付き合ってくれてありがとう。
+
+付き合って今まで半年くらいたって
+最初はなんでも考え合うじゃん、ケンカしないじゃん
+とか思ってたけど
+最近ではちょっとしたすれ違いとかあって
+俺は俺でしんどかったし、そんな俺見て
+りこも多分どうすればいいのかわかんなくて
+俺が苦しませちゃってたかなと思う。
+
+最近気づいたのが、
+俺が未熟だったから愛なんか理解できてなくて
+自分が思う愛ってこうあるべきだよねっていう形を
+りこに求めてたとこがあったかもしれない。
+けどそれって俺の自己満だったし
+りこのことちゃんと愛せてないなって気づいた
+ドライなとこはね、ちょっと改善してくれればうれしいなと思うけど、
+無理させたくないし、りこも頑張ってくれてるの知ってるから
+愛してるってたくさん言ってる俺より、りこのほうがちゃんと愛してくれてるんだなって
+最近では思うよ。
 
 Happy Birthday Rico.`
       }
@@ -431,11 +471,11 @@ Happy Birthday Rico.`
       const btn = document.getElementById("memoryBtn" + num);
       const labels = [
         "",
-        "Memory #1 — The Beginning ✅",
-        "Memory #2 — Adventure ✅",
-        "Memory #3 — Everyday Life ✅",
-        "Memory #4 — Goodbye For Now ✅",
-        "Memory #5 — Final Archive ✅"
+        "Chapter 1 — The Beginning ✅",
+        "Chapter 2 — Adventure ✅",
+        "Chapter 3 — Everyday Life ✅",
+        "Chapter 4 — Goodbye For Now ✅",
+        "Chapter 5 — Final Archive ✅"
       ];
 
       btn.innerText = labels[num];
