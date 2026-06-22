@@ -55,7 +55,72 @@
       max-width: 420px;
       box-shadow: 0 0 30px rgba(255,95,162,0.35);
     }
+.vault-card {
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 95, 162, 0.6);
+  padding: 28px;
+  border-radius: 22px;
+  max-width: 430px;
+  width: 90%;
+  box-shadow: 0 0 35px rgba(255, 95, 162, 0.35);
+  position: relative;
+  overflow: hidden;
+}
 
+.vault-top {
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #ff8fbd;
+  margin-bottom: 20px;
+}
+
+.vault-info {
+  text-align: left;
+  background: rgba(255,255,255,0.08);
+  padding: 18px;
+  border-radius: 15px;
+  margin: 18px 0;
+  line-height: 1.8;
+}
+
+.vault-info span {
+  color: #ffb3d1;
+  font-weight: bold;
+}
+
+.locked {
+  color: #ff4f8f;
+  letter-spacing: 2px;
+}
+
+.system-text {
+  font-size: 15px;
+  opacity: 0.85;
+  margin-top: 20px;
+}
+
+.scan-line {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, #ff5fa2, transparent);
+  animation: scan 2s infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
     .hint {
       font-size: 14px;
       opacity: 0.75;
@@ -105,19 +170,28 @@
 <body>
 
   <!-- Password Screen -->
-  <div id="passwordScreen" class="screen active">
-    <div class="card">
-      <h1>Access Restricted 🔒</h1>
-      <p>This page is only for one special person.</p>
+  <!-- Intro / Password Screen -->
+<div id="passwordScreen" class="screen active">
+  <div class="vault-card">
+    <div class="vault-top">MEMORY VAULT</div>
 
-      <input id="passwordInput" type="password" placeholder="Enter password" />
-      <button onclick="checkPassword()">Unlock</button>
+    <div class="scan-line"></div>
 
-      <p id="passwordMessage" class="hint"></p>
-      <p class="hint">Hint: your name</p>
+    <div class="vault-info">
+      <p><span>Archive Owner:</span> Rico</p>
+      <p><span>Status:</span> <strong class="locked">LOCKED</strong></p>
+      <p><span>Package:</span> 1 birthday archive detected</p>
     </div>
-  </div>
 
+    <p class="system-text">Authentication required</p>
+
+    <input id="passwordInput" type="password" placeholder="Enter passcode" />
+    <button onclick="checkPassword()">UNLOCK</button>
+
+    <p id="passwordMessage" class="hint"></p>
+    <p class="hint">Hint: special number</p>
+  </div>
+</div>
   <!-- Slider Game -->
   <div id="gameScreen" class="screen">
     <div class="card">
