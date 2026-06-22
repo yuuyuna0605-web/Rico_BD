@@ -108,6 +108,44 @@
   margin-bottom: 15px;
 }
 
+    .terminal-box {
+  text-align: left;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 20px 0;
+  min-height: 130px;
+  font-family: monospace;
+  color: #ffd1e5;
+}
+
+.terminal-box p {
+  margin: 10px 0;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 14px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 18px;
+}
+
+#loadingFill {
+  width: 0%;
+  height: 100%;
+  background: #ff5fa2;
+  transition: width 0.4s ease;
+}
+
+#loadingPercent {
+  font-family: monospace;
+  margin-top: 12px;
+  color: #ffb3d1;
+}
+
 @keyframes scan {
   0% {
     transform: translateX(-100%);
@@ -192,6 +230,26 @@
     <p class="hint">Hint: special number</p>
   </div>
 </div>
+<!-- Loading Screen -->
+<div id="loadingScreen" class="screen">
+  <div class="vault-card">
+    <h1 id="loadingTitle">ACCESS GRANTED</h1>
+
+    <div class="terminal-box">
+      <p id="line1"></p>
+      <p id="line2"></p>
+      <p id="line3"></p>
+      <p id="line4"></p>
+    </div>
+
+    <div class="loading-bar">
+      <div id="loadingFill"></div>
+    </div>
+
+    <p id="loadingPercent">0%</p>
+  </div>
+</div>
+
   <!-- Slider Game -->
   <div id="gameScreen" class="screen">
     <div class="card">
@@ -248,16 +306,62 @@
     const PASSWORD = "0103"; // ← パスワードを変えるならここ
 
     function checkPassword() {
-      const input = document.getElementById("passwordInput").value.toLowerCase();
-      const message = document.getElementById("passwordMessage");
+  const input = document.getElementById("passwordInput").value.toLowerCase();
+  const message = document.getElementById("passwordMessage");
 
-      if (input === PASSWORD) {
-        showScreen("gameScreen");
-      } else {
-        message.innerText = "Wrong password... try again 🤨";
-      }
+  if (input === PASSWORD) {
+    showScreen("loadingScreen");
+    startLoadingSequence();
+  } else {
+    message.innerText = "Wrong passcode... try again 🤨";
+  }
+}
+
+    function typeText(elementId, text, speed, callback) {
+  const element = document.getElementById(elementId);
+  element.innerText = "";
+  let i = 0;
+
+  const typing = setInterval(() => {
+    element.innerText += text[i];
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(typing);
+      if (callback) callback();
     }
+  }, speed);
+}
 
+function updateLoading(percent) {
+  document.getElementById("loadingFill").style.width = percent + "%";
+  document.getElementById("loadingPercent").innerText = percent + "%";
+}
+
+function startLoadingSequence() {
+  updateLoading(0);
+
+  typeText("line1", "> Authentication successful...", 45, () => {
+    updateLoading(25);
+
+    typeText("line2", "> Initializing Memory Vault...", 45, () => {
+      updateLoading(50);
+
+      typeText("line3", "> Scanning birthday archive...", 45, () => {
+        updateLoading(78);
+
+        typeText("line4", "> 5 memories detected.", 45, () => {
+          updateLoading(100);
+
+          setTimeout(() => {
+            showScreen("gameScreen");
+          }, 1200);
+        });
+      });
+    });
+  });
+}
+    
     function updateSlider() {
       const value = document.getElementById("missSlider").value;
       document.getElementById("percent").innerText = value + "%";
