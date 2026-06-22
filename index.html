@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Rico</title>
+  <title>Rico's Birthday Memory Vault</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #111, #3b0a2a);
+      background: radial-gradient(circle at top, #3b0a2a, #080808 70%);
       color: white;
       text-align: center;
       overflow-x: hidden;
@@ -18,7 +18,7 @@
     .screen {
       display: none;
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 35px 20px;
       box-sizing: border-box;
       justify-content: center;
       align-items: center;
@@ -27,6 +27,23 @@
 
     .active {
       display: flex;
+    }
+
+    .vault-card {
+      background: rgba(0, 0, 0, 0.68);
+      border: 1px solid rgba(255, 95, 162, 0.6);
+      padding: 28px;
+      border-radius: 22px;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 0 35px rgba(255, 95, 162, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ff8fbd;
+      letter-spacing: 2px;
     }
 
     input, button {
@@ -48,130 +65,98 @@
       background: #ff2f87;
     }
 
-    .card {
-      background: rgba(255,255,255,0.12);
-      padding: 25px;
-      border-radius: 20px;
-      max-width: 420px;
-      box-shadow: 0 0 30px rgba(255,95,162,0.35);
-    }
-.vault-card {
-  background: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(255, 95, 162, 0.6);
-  padding: 28px;
-  border-radius: 22px;
-  max-width: 430px;
-  width: 90%;
-  box-shadow: 0 0 35px rgba(255, 95, 162, 0.35);
-  position: relative;
-  overflow: hidden;
-}
-
-.vault-top {
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: 4px;
-  color: #ff8fbd;
-  margin-bottom: 20px;
-}
-
-.vault-info {
-  text-align: left;
-  background: rgba(255,255,255,0.08);
-  padding: 18px;
-  border-radius: 15px;
-  margin: 18px 0;
-  line-height: 1.8;
-}
-
-.vault-info span {
-  color: #ffb3d1;
-  font-weight: bold;
-}
-
-.locked {
-  color: #ff4f8f;
-  letter-spacing: 2px;
-}
-
-.system-text {
-  font-size: 15px;
-  opacity: 0.85;
-  margin-top: 20px;
-}
-
-.scan-line {
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, #ff5fa2, transparent);
-  animation: scan 2s infinite;
-  margin-bottom: 15px;
-}
-
-    .terminal-box {
-  text-align: left;
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 14px;
-  padding: 18px;
-  margin: 20px 0;
-  min-height: 130px;
-  font-family: monospace;
-  color: #ffd1e5;
-}
-
-.terminal-box p {
-  margin: 10px 0;
-}
-
-.loading-bar {
-  width: 100%;
-  height: 14px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 99px;
-  overflow: hidden;
-  margin-top: 18px;
-}
-
-#loadingFill {
-  width: 0%;
-  height: 100%;
-  background: #ff5fa2;
-  transition: width 0.4s ease;
-}
-
-#loadingPercent {
-  font-family: monospace;
-  margin-top: 12px;
-  color: #ffb3d1;
-}
-
-@keyframes scan {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
     .hint {
       font-size: 14px;
       opacity: 0.75;
     }
 
-    input[type="range"] {
-      width: 280px;
+    .vault-info {
+      text-align: left;
+      background: rgba(255,255,255,0.08);
+      padding: 18px;
+      border-radius: 15px;
+      margin: 18px 0;
+      line-height: 1.8;
     }
 
-    #percent {
-      font-size: 34px;
+    .vault-info span {
+      color: #ffb3d1;
       font-weight: bold;
-      margin: 15px;
+    }
+
+    .locked {
+      color: #ff4f8f;
+      letter-spacing: 2px;
+    }
+
+    .scan-line {
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, #ff5fa2, transparent);
+      animation: scan 2s infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+
+    .terminal-box {
+      text-align: left;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 18px;
+      margin: 20px 0;
+      min-height: 130px;
+      font-family: monospace;
+      color: #ffd1e5;
+    }
+
+    .loading-bar {
+      width: 100%;
+      height: 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    #loadingFill {
+      width: 0%;
+      height: 100%;
+      background: #ff5fa2;
+      transition: width 0.4s ease;
+    }
+
+    .memory-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .memory-grid button {
+      width: 100%;
+      background: rgba(255,95,162,0.25);
+      border: 1px solid rgba(255,95,162,0.6);
+    }
+
+    .unlocked {
+      background: rgba(120,255,180,0.25) !important;
+      border: 1px solid rgba(120,255,180,0.7) !important;
+    }
+
+    .lock-option {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .tap-heart {
+      font-size: 46px;
+      background: transparent;
     }
 
     img {
@@ -208,191 +193,141 @@
 <body>
 
   <!-- Password Screen -->
-  <!-- Intro / Password Screen -->
-<div id="passwordScreen" class="screen active">
-  <div class="vault-card">
-    <div class="vault-top">MEMORY VAULT</div>
+  <div id="passwordScreen" class="screen active">
+    <div class="vault-card">
+      <h1>MEMORY VAULT</h1>
+      <div class="scan-line"></div>
 
-    <div class="scan-line"></div>
+      <div class="vault-info">
+        <p><span>Archive Owner:</span> Rico</p>
+        <p><span>Status:</span> <strong class="locked">LOCKED</strong></p>
+        <p><span>Package:</span> 5 birthday memories detected</p>
+      </div>
 
-    <div class="vault-info">
-      <p><span>Archive Owner:</span> Rico</p>
-      <p><span>Status:</span> <strong class="locked">LOCKED</strong></p>
-      <p><span>Package:</span> 1 birthday archive detected</p>
-    </div>
+      <p>Authentication required</p>
 
-    <p class="system-text">Authentication required</p>
+      <input id="passwordInput" type="password" placeholder="Enter passcode" />
+      <button onclick="checkPassword()">UNLOCK</button>
 
-    <input id="passwordInput" type="password" placeholder="Enter passcode" />
-    <button onclick="checkPassword()">UNLOCK</button>
-
-    <p id="passwordMessage" class="hint"></p>
-    <p class="hint">Hint: special number</p>
-  </div>
-</div>
-<!-- Loading Screen -->
-<div id="loadingScreen" class="screen">
-  <div class="vault-card">
-    <h1 id="loadingTitle">ACCESS GRANTED</h1>
-
-    <div class="terminal-box">
-      <p id="line1"></p>
-      <p id="line2"></p>
-      <p id="line3"></p>
-      <p id="line4"></p>
-    </div>
-
-    <div class="loading-bar">
-      <div id="loadingFill"></div>
-    </div>
-
-    <p id="loadingPercent">0%</p>
-  </div>
-</div>
-
-  <!-- Slider Game -->
-  <div id="gameScreen" class="screen">
-    <div class="card">
-      <h1>Question 💭</h1>
-      <p>How much do you think Yufan misses you?</p>
-
-      <input id="missSlider" type="range" min="0" max="100" value="0" oninput="updateSlider()" />
-      <div id="percent">0%</div>
-
-      <p id="sliderText">Move the slider.</p>
-
-      <button id="revealButton" style="display:none;" onclick="showFinal()">
-        Reveal Secret 💌
-      </button>
+      <p id="passwordMessage" class="hint"></p>
+      <p class="hint">Hint: special number</p>
     </div>
   </div>
 
-  <!-- Final Screen -->
-  <div id="finalScreen" class="screen">
-    <h1>Happy Birthday Rico 🎂</h1>
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="screen">
+    <div class="vault-card">
+      <h1>ACCESS GRANTED</h1>
 
-    <!-- 写真を入れるなら、GitHubに photo1.jpg としてアップロード -->
-    <img src="photo1.jpg" alt="Our photo" />
+      <div class="terminal-box">
+        <p id="line1"></p>
+        <p id="line2"></p>
+        <p id="line3"></p>
+        <p id="line4"></p>
+      </div>
 
-    <div class="message">
-      <p>
-        Rico, happy birthday.
-      </p>
+      <div class="loading-bar">
+        <div id="loadingFill"></div>
+      </div>
 
-      <p>
-        Even though we are far apart, I still wanted to do something
-        a little special for you.
-      </p>
-
-      <p>
-        I’m really happy that I met you.
-        Thank you for being in my life.
-      </p>
-
-      <p>
-        I hope this year brings you a lot of happiness, love, and beautiful memories.
-      </p>
-
-      <p>
-        From Yufan
-      </p>
+      <p id="loadingPercent">0%</p>
     </div>
+  </div>
 
-    <button onclick="giftMessage()">🎁 Open your gift now</button>
-    <p id="giftText"></p>
+  <!-- Memory Menu -->
+  <div id="menuScreen" class="screen">
+    <div class="vault-card">
+      <h1>MEMORY ARCHIVE</h1>
+      <p class="hint">Choose a memory to unlock</p>
+
+      <div class="memory-grid">
+        <button id="memoryBtn1" onclick="openMemory(1)">Memory #1 🔒</button>
+        <button id="memoryBtn2" onclick="openMemory(2)">Memory #2 🔒</button>
+        <button id="memoryBtn3" onclick="openMemory(3)">Memory #3 🔒</button>
+        <button id="memoryBtn4" onclick="openMemory(4)">Memory #4 🔒</button>
+        <button id="memoryBtn5" onclick="openMemory(5)">Memory #5 🔒</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="memoryGameScreen" class="screen">
+    <div class="vault-card">
+      <h1 id="gameTitle">Memory Lock</h1>
+      <p id="gameQuestion"></p>
+
+      <div id="gameArea"></div>
+
+      <p id="gameFeedback" class="hint"></p>
+      <button onclick="showScreen('menuScreen')">Back to Archive</button>
+    </div>
+  </div>
+
+  <!-- Memory Detail -->
+  <div id="memoryDetailScreen" class="screen">
+    <div class="vault-card">
+      <h1 id="memoryTitle">Memory Unlocked</h1>
+      <img id="memoryImage" src="" alt="Memory photo" />
+
+      <div class="message">
+        <p id="memoryMessage"></p>
+      </div>
+
+      <button onclick="showScreen('menuScreen')">Back to Archive</button>
+    </div>
   </div>
 
   <script>
-    const PASSWORD = "0103"; // ← パスワードを変えるならここ
+    const PASSWORD = "0103";
+
+    let currentMemory = 1;
+
+    let unlockedMemories = {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false
+    };
+
+    const memories = {
+      1: {
+        title: "Memory #1 Unlocked",
+        image: "photo1.jpg",
+        message: "This is where our memory starts. I still smile when I think about this."
+      },
+      2: {
+        title: "Memory #2 Unlocked",
+        image: "photo2.jpg",
+        message: "This photo reminds me how happy I am that I met you."
+      },
+      3: {
+        title: "Memory #3 Unlocked",
+        image: "photo3.jpg",
+        message: "Even with the distance between us, you still feel close to me."
+      },
+      4: {
+        title: "Memory #4 Unlocked",
+        image: "photo4.jpg",
+        message: "This one is one of my favorite memories with you."
+      },
+      5: {
+        title: "Final Memory Unlocked",
+        image: "photo5.jpg",
+        message: "Happy birthday Rico. I hope this makes you smile, even just a little. I miss you a lot."
+      }
+    };
 
     function checkPassword() {
-  const input = document.getElementById("passwordInput").value.toLowerCase();
-  const message = document.getElementById("passwordMessage");
+      const input = document.getElementById("passwordInput").value.toLowerCase();
+      const message = document.getElementById("passwordMessage");
 
-  if (input === PASSWORD) {
-    showScreen("loadingScreen");
-    startLoadingSequence();
-  } else {
-    message.innerText = "Wrong passcode... try again 🤨";
-  }
-}
-
-    function typeText(elementId, text, speed, callback) {
-  const element = document.getElementById(elementId);
-  element.innerText = "";
-  let i = 0;
-
-  const typing = setInterval(() => {
-    element.innerText += text[i];
-    i++;
-
-    if (i >= text.length) {
-      clearInterval(typing);
-      if (callback) callback();
-    }
-  }, speed);
-}
-
-function updateLoading(percent) {
-  document.getElementById("loadingFill").style.width = percent + "%";
-  document.getElementById("loadingPercent").innerText = percent + "%";
-}
-
-function startLoadingSequence() {
-  updateLoading(0);
-
-  typeText("line1", "> Authentication successful...", 45, () => {
-    updateLoading(25);
-
-    typeText("line2", "> Initializing Memory Vault...", 45, () => {
-      updateLoading(50);
-
-      typeText("line3", "> Scanning birthday archive...", 45, () => {
-        updateLoading(78);
-
-        typeText("line4", "> 5 memories detected.", 45, () => {
-          updateLoading(100);
-
-          setTimeout(() => {
-            showScreen("gameScreen");
-          }, 1200);
-        });
-      });
-    });
-  });
-}
-    
-    function updateSlider() {
-      const value = document.getElementById("missSlider").value;
-      document.getElementById("percent").innerText = value + "%";
-
-      const text = document.getElementById("sliderText");
-      const button = document.getElementById("revealButton");
-
-      if (value < 70) {
-        text.innerText = "Hmm... definitely more than that.";
-        button.style.display = "none";
-      } else if (value < 95) {
-        text.innerText = "Getting closer...";
-        button.style.display = "none";
-      } else if (value < 100) {
-        text.innerText = "Almost correct.";
-        button.style.display = "none";
+      if (input === PASSWORD) {
+        showScreen("loadingScreen");
+        startLoadingSequence();
       } else {
-        text.innerText = "Correct. 100% is the only right answer.";
-        button.style.display = "inline-block";
-        startHearts();
+        message.innerText = "Wrong passcode... try again 🤨";
       }
-    }
-
-    function showFinal() {
-      showScreen("finalScreen");
-      startHearts();
-    }
-
-    function giftMessage() {
-      document.getElementById("giftText").innerText =
-        "Now you can open your real gift 🎁";
     }
 
     function showScreen(id) {
@@ -400,6 +335,186 @@ function startLoadingSequence() {
         screen.classList.remove("active");
       });
       document.getElementById(id).classList.add("active");
+    }
+
+    function typeText(elementId, text, speed, callback) {
+      const element = document.getElementById(elementId);
+      element.innerText = "";
+      let i = 0;
+
+      const typing = setInterval(() => {
+        element.innerText += text[i];
+        i++;
+
+        if (i >= text.length) {
+          clearInterval(typing);
+          if (callback) callback();
+        }
+      }, speed);
+    }
+
+    function updateLoading(percent) {
+      document.getElementById("loadingFill").style.width = percent + "%";
+      document.getElementById("loadingPercent").innerText = percent + "%";
+    }
+
+    function startLoadingSequence() {
+      updateLoading(0);
+
+      typeText("line1", "> Authentication successful...", 45, () => {
+        updateLoading(25);
+
+        typeText("line2", "> Initializing Memory Vault...", 45, () => {
+          updateLoading(50);
+
+          typeText("line3", "> Scanning birthday archive...", 45, () => {
+            updateLoading(78);
+
+            typeText("line4", "> 5 encrypted memories detected.", 45, () => {
+              updateLoading(100);
+
+              setTimeout(() => {
+                showScreen("menuScreen");
+              }, 1200);
+            });
+          });
+        });
+      });
+    }
+
+    function openMemory(num) {
+      currentMemory = num;
+      document.getElementById("gameFeedback").innerText = "";
+      document.getElementById("gameArea").innerHTML = "";
+
+      if (unlockedMemories[num]) {
+        showMemory(num);
+        return;
+      }
+
+      showScreen("memoryGameScreen");
+
+      if (num === 1) memoryQuiz();
+      if (num === 2) tapGame();
+      if (num === 3) distanceGame();
+      if (num === 4) findHeartGame();
+      if (num === 5) finalUnlockGame();
+    }
+
+    function unlockMemory(num) {
+      unlockedMemories[num] = true;
+
+      const btn = document.getElementById("memoryBtn" + num);
+      btn.innerText = "Memory #" + num + " ✅";
+      btn.classList.add("unlocked");
+
+      showMemory(num);
+
+      if (num === 5) {
+        startHearts();
+      }
+    }
+
+    function showMemory(num) {
+      document.getElementById("memoryTitle").innerText = memories[num].title;
+      document.getElementById("memoryImage").src = memories[num].image;
+      document.getElementById("memoryMessage").innerText = memories[num].message;
+      showScreen("memoryDetailScreen");
+    }
+
+    function memoryQuiz() {
+      document.getElementById("gameTitle").innerText = "Memory Lock #1";
+      document.getElementById("gameQuestion").innerText = "Who is this birthday archive for?";
+
+      document.getElementById("gameArea").innerHTML = `
+        <button class="lock-option" onclick="wrongAnswer()">Someone random</button>
+        <button class="lock-option" onclick="unlockMemory(1)">Rico</button>
+        <button class="lock-option" onclick="wrongAnswer()">Yufan</button>
+      `;
+    }
+
+    function tapGame() {
+      let taps = 0;
+
+      document.getElementById("gameTitle").innerText = "Memory Lock #2";
+      document.getElementById("gameQuestion").innerText = "Tap the heart 7 times to restore this memory.";
+
+      document.getElementById("gameArea").innerHTML = `
+        <button class="tap-heart" onclick="tapHeart()">❤️</button>
+        <p id="tapCount">0 / 7</p>
+      `;
+
+      window.tapHeart = function() {
+        taps++;
+        document.getElementById("tapCount").innerText = taps + " / 7";
+
+        if (taps >= 7) {
+          unlockMemory(2);
+        }
+      };
+    }
+
+    function distanceGame() {
+      let distance = 12000;
+
+      document.getElementById("gameTitle").innerText = "Memory Lock #3";
+      document.getElementById("gameQuestion").innerText = "Reduce the distance to 0 km.";
+
+      document.getElementById("gameArea").innerHTML = `
+        <h2 id="distanceText">${distance} km</h2>
+        <button onclick="reduceDistance()">Move closer</button>
+      `;
+
+      window.reduceDistance = function() {
+        distance -= 3000;
+        if (distance < 0) distance = 0;
+
+        document.getElementById("distanceText").innerText = distance + " km";
+
+        if (distance === 0) {
+          unlockMemory(3);
+        }
+      };
+    }
+
+    function findHeartGame() {
+      document.getElementById("gameTitle").innerText = "Memory Lock #4";
+      document.getElementById("gameQuestion").innerText = "Find the real heart.";
+
+      document.getElementById("gameArea").innerHTML = `
+        <button onclick="wrongAnswer()">♡</button>
+        <button onclick="wrongAnswer()">♡</button>
+        <button onclick="unlockMemory(4)">❤</button>
+        <button onclick="wrongAnswer()">♡</button>
+        <button onclick="wrongAnswer()">♡</button>
+      `;
+    }
+
+    function finalUnlockGame() {
+      document.getElementById("gameTitle").innerText = "Final Memory Lock";
+      document.getElementById("gameQuestion").innerText = "Final question: how much does Yufan miss you?";
+
+      document.getElementById("gameArea").innerHTML = `
+        <input id="finalSlider" type="range" min="0" max="100" value="0" oninput="checkFinalSlider()" />
+        <h2 id="finalPercent">0%</h2>
+        <p id="finalText">Move the slider.</p>
+      `;
+
+      window.checkFinalSlider = function() {
+        const value = document.getElementById("finalSlider").value;
+        document.getElementById("finalPercent").innerText = value + "%";
+
+        if (value < 100) {
+          document.getElementById("finalText").innerText = "Nope. More.";
+        } else {
+          document.getElementById("finalText").innerText = "Correct.";
+          setTimeout(() => unlockMemory(5), 600);
+        }
+      };
+    }
+
+    function wrongAnswer() {
+      document.getElementById("gameFeedback").innerText = "Wrong key. Try again.";
     }
 
     function startHearts() {
